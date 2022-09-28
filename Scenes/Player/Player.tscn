@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Modules/Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://Modules/Player/PlayerMain.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Player/player_walk.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -72,3 +72,13 @@ shape = SubResource( 1 )
 anims/RESET = SubResource( 2 )
 anims/Walk_left = SubResource( 4 )
 anims/Walk_right = SubResource( 3 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = -29.0
+margin_top = -49.0
+margin_right = 29.0
+margin_bottom = -33.0
+text = "Brangers"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true

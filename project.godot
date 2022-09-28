@@ -14,6 +14,10 @@ config/name="Legend of Universe"
 run/main_scene="res://World.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Logger="*res://Librairies/Logger/logger.gd"
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true

@@ -1,12 +1,6 @@
-extends KinematicBody2D
+extends "res://Modules/Player/AbstractPlayer.gd"
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-const SPEED = 10000
-
-var playerPosition = Vector2.ZERO
 onready var animationPlayer = $AnimationPlayer
 var positionAnim = 0
 
@@ -21,7 +15,6 @@ func animation_player_x():
 		animationPlayer.play("Walk_right")
 	elif (playerPosition.x == 0 and playerPosition.y != 0 and !positionAnim):
 		animationPlayer.play("Walk_left")
-		
 
 func animation_player():
 	if (playerPosition.y > 0):
