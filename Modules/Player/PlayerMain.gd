@@ -5,32 +5,32 @@ onready var animationPlayer = $AnimationPlayer
 var positionAnim = 0
 
 func animation_player_x():
-	if (playerPosition.x > 0):
+	if (playerVelocity.x > 0):
 		animationPlayer.play("Walk_right")
 		positionAnim = 1
-	elif (playerPosition.x < 0):
+	elif (playerVelocity.x < 0):
 		animationPlayer.play("Walk_left")
 		positionAnim = 0
-	elif (playerPosition.x == 0 and playerPosition.y != 0 and positionAnim):
+	elif (playerVelocity.x == 0 and playerVelocity.y != 0 and positionAnim):
 		animationPlayer.play("Walk_right")
-	elif (playerPosition.x == 0 and playerPosition.y != 0 and !positionAnim):
+	elif (playerVelocity.x == 0 and playerVelocity.y != 0 and !positionAnim):
 		animationPlayer.play("Walk_left")
 
 func animation_player():
-	if (playerPosition.y > 0):
+	if (playerVelocity.y > 0):
 		animation_player_x()
-	elif (playerPosition.y < 0):
+	elif (playerVelocity.y < 0):
 		animation_player_x()
-	elif (playerPosition.y == 0):
+	elif (playerVelocity.y == 0):
 		animation_player_x()
 
 
 func _physics_process(delta):
-	playerPosition.x = (Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")) * SPEED
-	playerPosition.y = (Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")) * SPEED
+	playerVelocity.x = (Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")) * SPEED
+	playerVelocity.y = (Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")) * SPEED
 	animation_player()
-	
-	playerPosition = move_and_slide(playerPosition * delta)
+	playerVelocity = move_and_slide(playerVelocity * delta)
+	setPlayerPos(global_transform.origin)
 
 # Called when the node enters the scene tree for the first time.
 func _ready(): 
