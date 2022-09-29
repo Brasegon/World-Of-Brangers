@@ -1,0 +1,14 @@
+[gd_scene format=2]
+
+[node name="Menu" type="Node2D"]
+
+[node name="Pseudo" type="TextEdit" parent="."]
+margin_right = 257.0
+margin_bottom = 40.0
+
+[node name="Button" type="Button" parent="."]
+margin_left = 25.0
+margin_top = 56.0
+margin_right = 215.0
+margin_bottom = 100.0
+text = "JOIN"

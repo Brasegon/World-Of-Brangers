@@ -17,6 +17,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Logger="*res://Librairies/Logger/logger.gd"
+Network="*res://Scenes/Utils/Network.tscn"
 
 [gui]
 
