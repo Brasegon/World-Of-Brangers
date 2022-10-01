@@ -1,7 +1,7 @@
 extends Control
 
-onready var playerName = $playerName
-onready var joinButton = $joinButton
+onready var playerName = $Panel/playerName
+onready var joinButton = $Panel/joinButton
 onready var Global = $"/root/Global"
 onready var Network = $"/root/Network"
 var player = null
@@ -10,7 +10,7 @@ var playerConnected = false;
 
 func connectServer(success:bool):
 	if (success):
-		Network.sendCommand("sendLogin", {
+		Network.sendCommand("login:connect", {
 			"username": playerName.text
 		})
 	else:
