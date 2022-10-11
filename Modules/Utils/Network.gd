@@ -36,6 +36,16 @@ func _connection_error():
 func sendCommand(command, value):
 	$Command.sendCommand(ws, command, value)
 
+func parserPacket(packet):
+	var packed_decoded = parse_json(packet)
+	if typeof(packed_decoded) == 18:
+		return packed_decoded
+	else:
+		return {
+			"command": "error",
+			"value": "error"
+		}
+
 func connectServer():
 	ws.connect("connection_established", self, "_connection_established")
 	ws.connect("connection_closed", self, "_connection_closed")
@@ -51,8 +61,7 @@ func _process(delta):
 	if ws.get_peer(1).is_connected_to_host():
 		if ws.get_peer(1).get_available_packet_count() > 0:
 			var packet = ws.get_peer(1).get_var()
-			print(parse_json(packet))
-			$Command.command(ws, parse_json(packet));
+			$Command.command(ws, parserPacket(packet));
 
 	
 
