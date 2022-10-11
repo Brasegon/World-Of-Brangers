@@ -11,8 +11,14 @@ config_version=4
 [application]
 
 config/name="Legend of Universe"
-run/main_scene="res://Player/Player.tscn"
+run/main_scene="res://Scenes/Global.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Logger="*res://Librairies/Logger/logger.gd"
+Network="*res://Scenes/Utils/Network.tscn"
+MainMenu="*res://Scenes/Menu/MainMenu.tscn"
 
 [gui]
 
