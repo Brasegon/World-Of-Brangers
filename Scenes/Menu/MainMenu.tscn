@@ -1,9 +1,18 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Modules/Menu/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Background/MainBackground.png" type="Texture" id=2]
 [ext_resource path="res://Thêmes/Panel.tres" type="Theme" id=3]
 [ext_resource path="res://Assets/Sprites/Background/World-of-Warcraft-Logo.png" type="Texture" id=4]
+[ext_resource path="res://font.tres" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=8]
+size = 45
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 25
+font_data = ExtResource( 5 )
 
 [sub_resource type="BitmapFont" id=3]
 height = 15.0
@@ -22,6 +31,13 @@ corner_radius_top_right = 35
 corner_radius_bottom_right = 35
 corner_radius_bottom_left = 35
 
+[sub_resource type="DynamicFontData" id=6]
+font_path = "res://Assets/Font/font.ttf"
+
+[sub_resource type="DynamicFont" id=7]
+size = 29
+font_data = SubResource( 6 )
+
 [node name="MainMenu" type="Control"]
 margin_right = 1026.0
 margin_bottom = 598.0
@@ -33,23 +49,50 @@ scale = Vector2( 1.00104, 0.999074 )
 texture = ExtResource( 2 )
 
 [node name="Panel" type="Panel" parent="."]
-margin_left = 303.0
-margin_top = 835.0
-margin_right = 636.0
-margin_bottom = 942.0
+margin_left = 103.0
+margin_top = 439.0
+margin_right = 1151.0
+margin_bottom = 836.0
+rect_pivot_offset = Vector2( 382, 110 )
+theme = ExtResource( 3 )
 
 [node name="playerName" type="TextEdit" parent="Panel"]
-margin_left = 18.0
-margin_top = 6.0
-margin_right = 320.0
-margin_bottom = 50.0
+margin_left = 243.0
+margin_top = 182.0
+margin_right = 840.0
+margin_bottom = 258.0
 
 [node name="joinButton" type="Button" parent="Panel"]
-margin_left = 54.0
-margin_top = 56.0
-margin_right = 278.0
-margin_bottom = 96.0
+margin_left = 323.0
+margin_top = 293.0
+margin_right = 718.0
+margin_bottom = 356.0
+theme = ExtResource( 3 )
 text = "JOIN"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
+margin_left = 11.0
+margin_top = 28.0
+margin_right = 1054.0
+margin_bottom = 78.0
+rect_pivot_offset = Vector2( 485, 50 )
+custom_fonts/normal_font = SubResource( 8 )
+bbcode_enabled = true
+bbcode_text = "[center]Connexion[/center]"
+text = "Connexion"
+scroll_active = false
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Panel"]
+margin_left = 242.0
+margin_top = 152.0
+margin_right = 369.0
+margin_bottom = 202.0
+rect_pivot_offset = Vector2( 470, 50 )
+custom_fonts/normal_font = SubResource( 9 )
+bbcode_enabled = true
+bbcode_text = "[center]Pseudo[/center]"
+text = "Pseudo"
+scroll_active = false
 
 [node name="Connection" type="Panel" parent="."]
 visible = false
@@ -77,9 +120,11 @@ theme = ExtResource( 3 )
 custom_styles/panel = SubResource( 5 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UpdatePanel"]
-margin_top = 10.0
-margin_right = 349.0
-margin_bottom = 56.0
+margin_left = 72.0
+margin_top = 14.0
+margin_right = 421.0
+margin_bottom = 60.0
+custom_fonts/normal_font = SubResource( 7 )
 bbcode_enabled = true
 bbcode_text = "[center]Note de mise à jour[/center]"
 text = "Note de mise à jour"
@@ -89,3 +134,32 @@ scroll_active = false
 position = Vector2( 528, 232.5 )
 scale = Vector2( 0.218056, 0.218056 )
 texture = ExtResource( 4 )
+
+[node name="Control" type="Control" parent="."]
+margin_top = 1024.0
+margin_right = 1918.0
+margin_bottom = 1072.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
+margin_left = 9.0
+margin_top = 11.0
+margin_right = 1198.0
+margin_bottom = 44.0
+rect_pivot_offset = Vector2( -856, -793 )
+custom_fonts/normal_font = SubResource( 7 )
+bbcode_enabled = true
+bbcode_text = "World of Brangers v0.1"
+text = "World of Brangers v0.1"
+scroll_active = false
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Control"]
+margin_left = 1169.0
+margin_top = 12.0
+margin_right = 1914.0
+margin_bottom = 45.0
+rect_pivot_offset = Vector2( 217, 0 )
+custom_fonts/normal_font = SubResource( 7 )
+bbcode_enabled = true
+bbcode_text = "[right]Copyright Brangers AB. DO not distribute![/right]"
+text = "Copyright Brangers AB. DO not distribute!"
+scroll_active = false
