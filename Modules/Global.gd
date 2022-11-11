@@ -5,10 +5,12 @@ extends Node2D
 onready var players = $Players
 # Called when the node enters the scene tree for the first time.
 
-func spawnPlayerOnline(name:String):
+func spawnPlayerOnline(uuid:String, name:String, pos:Vector2):
 	var playerClass = preload("res://Scenes/Player/Player.tscn");
 	var playerInstance = playerClass.instance();
 	playerInstance.setPlayerName(name)
+	playerInstance.name = uuid
+	playerInstance.setPlayerPos(pos)
 	playerInstance.init(true);
 	players.add_child(playerInstance);
 
@@ -16,7 +18,7 @@ func spawnPlayer(uuid:String, name:String, pos:Vector2):
 	var playerClass = preload("res://Scenes/Player/Player.tscn");
 	var playerInstance = playerClass.instance();
 	playerInstance.setPlayerName(name)
-	playerInstance.name = uuid
+	playerInstance.name = "mainPlayer"
 	playerInstance.setPlayerPos(pos)
 	playerInstance.init(false);
 	players.add_child(playerInstance);
