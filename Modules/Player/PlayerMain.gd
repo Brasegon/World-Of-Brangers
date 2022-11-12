@@ -3,9 +3,12 @@ extends KinematicBody2D
 
 onready var animationPlayer = $AnimationPlayer
 var positionAnim = 0
-const SPEED = 10000
+const SPEED = 100
+const TIME_OF_PACKET = 0.01
 var playerVelocity = Vector2.ZERO
 var playerPosition = Vector2.ZERO
+var okToSend = true
+var timer = 0
 var isNetworkPlayer = false
 
 func animation_player_x():
@@ -20,6 +23,12 @@ func animation_player_x():
 	elif (playerVelocity.x == 0 and playerVelocity.y != 0 and !positionAnim):
 		animationPlayer.play("Walk_left")
 
+func animation_otherPlayer(type):
+	if (type == 1):
+		animationPlayer.play("Walk_right")
+	if (type == 2):
+		animationPlayer.play("Walk_left")
+
 func animation_player():
 	if (playerVelocity.y > 0):
 		animation_player_x()
@@ -31,12 +40,24 @@ func animation_player():
 
 func _physics_process(delta):
 	if !isNetworkPlayer:
-		playerVelocity.x = (Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")) * SPEED
-		playerVelocity.y = (Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")) * SPEED
+		playerVelocity.x = (Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"))
+		playerVelocity.y = (Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up"))
 		animation_player()
-	if (playerVelocity.x != 0 or playerVelocity.y != 0):
-		playerVelocity = move_and_slide(playerVelocity * delta)
-		setPlayerPos(global_transform.origin)
+	playerVelocity = move_and_slide(playerVelocity * SPEED)
+	print(playerVelocity)
+	if (okToSend == false):
+		timer += delta
+	if (timer >= TIME_OF_PACKET):
+		okToSend = true
+		timer = 0
+	if ((playerVelocity.x != 0 or playerVelocity.y != 0) and okToSend):
+		Network.sendCommand("move", {
+			"x": global_transform.origin.x,
+			"y": global_transform.origin.y,
+			"direction": playerVelocity.x
+		})
+		okToSend = false;
+	setPlayerPos(global_transform.origin)
 
 func getPlayerPos():
 	return playerVelocity;
@@ -49,7 +70,6 @@ func setPlayerName(playerNames:String):
 func setPlayerPos(playerPosSet):
 	global_transform.origin = playerPosSet;
 	playerPosition = global_transform.origin;
-	Network.sendCommand("move", "{x: "+String(playerPosition.x)+", y: "+String(playerPosition.y)+"}")
 
 func init(networkPlayer:bool):
 	isNetworkPlayer = networkPlayer
