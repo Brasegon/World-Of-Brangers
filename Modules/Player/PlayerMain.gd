@@ -10,7 +10,6 @@ var playerPosition = Vector2.ZERO
 var okToSend = true
 var timer = 0
 var isNetworkPlayer = false
-onready var Network = $"/root/Network"
 
 func animation_player_x():
 	if (playerVelocity.x > 0):
@@ -73,6 +72,7 @@ func setPlayerName(playerNames:String):
 func setPlayerPos(playerPosSet):
 	global_transform.origin = playerPosSet;
 	playerPosition = global_transform.origin;
+	Network.sendCommand("move", "{x: "+String(playerPosition.x)+", y: "+String(playerPosition.y)+"}")
 
 func init(networkPlayer:bool):
 	isNetworkPlayer = networkPlayer

@@ -11,6 +11,7 @@ func loginSuccess(packet):
 	var global: Global = get_node("/root/Global")
 	var pos = Vector2(packet.value.pos.x, packet.value.pos.y)
 	global.spawnPlayer(packet.value.uuid, packet.value.username, pos)
+	global.mainUuidPlayer = packet.value.uuid;
 	MainMenu.hide()
 func spawnNewPlayer(packet):
 	var global: Global = get_node("/root/Global")

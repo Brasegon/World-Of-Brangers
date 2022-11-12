@@ -4,6 +4,7 @@ extends Node2D
 # var b = "text"
 onready var players = $Players
 # Called when the node enters the scene tree for the first time.
+var mainUuidPlayer;
 
 func spawnPlayerOnline(uuid:String, name:String, pos:Vector2):
 	var playerClass = preload("res://Scenes/Player/Player.tscn");
