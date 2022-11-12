@@ -10,7 +10,7 @@ config_version=4
 
 [application]
 
-config/name="Legend of Universe"
+config/name="World of Brangers"
 run/main_scene="res://Scenes/Global.tscn"
 config/icon="res://icon.png"
 
@@ -28,17 +28,18 @@ multirun/add_custom_args=true
 multirun/first_window_args="listen"
 multirun/other_window_args="join"
 
-[editor_plugins]
-
-enabled=PoolStringArray( "res://addons/multirun/plugin.cfg" )
-
 [display]
 
 window/size/width=1920
 window/size/height=1080
-window/size/fullscreen=true
+window/size/test_width=1280
+window/size/test_height=720
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/multirun/plugin.cfg" )
 
 [gui]
 

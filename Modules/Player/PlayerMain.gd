@@ -44,9 +44,7 @@ func _physics_process(delta):
 		playerVelocity.y = (Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up"))
 		animation_player()
 	playerVelocity = move_and_slide(playerVelocity * SPEED)
-	if (playerVelocity.x != 0):
-		print(playerVelocity.x * SPEED);
-		print(global_transform.origin);
+	print(playerVelocity)
 	if (okToSend == false):
 		timer += delta
 	if (timer >= TIME_OF_PACKET):
@@ -72,7 +70,6 @@ func setPlayerName(playerNames:String):
 func setPlayerPos(playerPosSet):
 	global_transform.origin = playerPosSet;
 	playerPosition = global_transform.origin;
-	Network.sendCommand("move", "{x: "+String(playerPosition.x)+", y: "+String(playerPosition.y)+"}")
 
 func init(networkPlayer:bool):
 	isNetworkPlayer = networkPlayer

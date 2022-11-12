@@ -29,7 +29,9 @@ func command(ws: WebSocketClient, packet):
 		var player: PlayerMain = get_node("/root/Global/Players/" + packet.value.uuid)
 		player.setPlayerPos(Vector2(packet.value.pos.x, packet.value.pos.y))
 		player.animation_otherPlayer(packet.value.direction)
-		
+	if (packet.command == "login:disconnectPlayer" && packet.value):
+		var player: PlayerMain = get_node("/root/Global/Players/" + packet.value.uuid)
+		player.queue_free()
 		
 
 # Called when the node enters the scene tree for the first time.
