@@ -50,18 +50,19 @@ func connectServer():
 	ws.connect("connection_established", self, "_connection_established")
 	ws.connect("connection_closed", self, "_connection_closed")
 	ws.connect("connection_error", self, "_connection_error")
+	ws.connect("data_received", self, "_client_received")
 	
-	var url = "ws://localhost:8080"
+	var url = "ws://192.168.1.80:8080"
 	print("Connecting to " + url)
 	ws.connect_to_url(url) # Replace with function body.
+
+func _client_received():	
+	var packet = ws.get_peer(1).get_var()
+	$Command.command(ws, parserPacket(packet));
 
 func _process(delta):
 	if ws.get_connection_status() == ws.CONNECTION_CONNECTING || ws.get_connection_status() == ws.CONNECTION_CONNECTED:
 		ws.poll()
-	if ws.get_peer(1).is_connected_to_host():
-		if ws.get_peer(1).get_available_packet_count() > 0:
-			var packet = ws.get_peer(1).get_var()
-			$Command.command(ws, parserPacket(packet));
 
 	
 
