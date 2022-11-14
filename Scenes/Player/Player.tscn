@@ -1,10 +1,43 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Modules/Player/PlayerMain.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Sprites/Player/player_walk.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sprites/walk_caucasian_skintone.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Font/MainMenu.tres" type="DynamicFont" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 42.5, 15.25 )
+
+[sub_resource type="Animation" id=6]
+resource_name = "Idle_Left"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 30, 31, 30 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Idle_Right"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 24, 25, 24 ]
+}
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -20,37 +53,43 @@ tracks/0/keys = {
 "update": 0,
 "values": [ 0 ]
 }
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
 
 [sub_resource type="Animation" id=4]
 resource_name = "Walk_left"
-length = 0.4
-tracks/0/type = "value"
+length = 0.6
+tracks/0/type = "bezier"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 5, 6, 7, 6 ]
+"points": PoolRealArray( 6, -0.25, 0, 0.25, 0, 7, -0.25, 0, 0.25, 0, 8, -0.25, 0, 0.25, 0, 9, -0.25, 0, 0.25, 0, 10, -0.25, 0, 0.25, 0, 11, -0.25, 0, 0.25, 0, 6, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 )
 }
 
 [sub_resource type="Animation" id=3]
 resource_name = "Walk_right"
-length = 0.4
-tracks/0/type = "value"
+length = 0.5
+tracks/0/type = "bezier"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 1, 2, 3, 0 ]
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0, 4, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 )
 }
 
 [node name="Player" type="KinematicBody2D"]
@@ -58,26 +97,28 @@ script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -1, 1 )
-scale = Vector2( 0.607813, 0.607813 )
 texture = ExtResource( 2 )
-hframes = 4
-vframes = 4
+hframes = 6
+vframes = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -7.5, 21.75 )
+position = Vector2( -5, 32 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Idle_Left = SubResource( 6 )
+anims/Idle_Right = SubResource( 5 )
 anims/RESET = SubResource( 2 )
 anims/Walk_left = SubResource( 4 )
 anims/Walk_right = SubResource( 3 )
 
 [node name="playerName" type="RichTextLabel" parent="."]
 anchor_bottom = 0.477
-margin_left = -61.0
-margin_top = -66.0
-margin_right = 60.0
-margin_bottom = -50.0
+margin_left = -210.0
+margin_top = -96.0
+margin_right = 202.0
+margin_bottom = -32.0
+custom_fonts/normal_font = ExtResource( 3 )
 bbcode_enabled = true
 bbcode_text = "[center]{playerName}[/center]"
 text = "{playerName}"

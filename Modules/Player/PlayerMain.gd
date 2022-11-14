@@ -11,6 +11,12 @@ var okToSend = true
 var timer = 0
 var isNetworkPlayer = false
 
+func idle_anim():
+	if (positionAnim == 1):
+		animationPlayer.play("Idle_Right")
+	elif (positionAnim == 0):
+		animationPlayer.play("Idle_Left")
+
 func animation_player_x():
 	if (playerVelocity.x > 0):
 		animationPlayer.play("Walk_right")
@@ -25,9 +31,11 @@ func animation_player_x():
 
 func animation_otherPlayer(type):
 	if (type == 1):
+		positionAnim = 1
 		animationPlayer.play("Walk_right")
 	if (type == 2):
 		animationPlayer.play("Walk_left")
+		positionAnim = 0
 
 func animation_player():
 	if (playerVelocity.y > 0):
@@ -43,6 +51,8 @@ func _physics_process(delta):
 		playerVelocity.x = (Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"))
 		playerVelocity.y = (Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up"))
 		animation_player()
+	if (!animationPlayer.current_animation == "Walk_right" && !animationPlayer.current_animation == "Walk_left"):
+		idle_anim()
 	playerVelocity = move_and_slide(playerVelocity * SPEED)
 	print(playerVelocity)
 	if (okToSend == false):
