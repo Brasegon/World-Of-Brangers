@@ -54,7 +54,6 @@ func _physics_process(delta):
 	if (!animationPlayer.current_animation == "Walk_right" && !animationPlayer.current_animation == "Walk_left"):
 		idle_anim()
 	playerVelocity = move_and_slide(playerVelocity * SPEED)
-	print(playerVelocity)
 	if (okToSend == false):
 		timer += delta
 	if (timer >= TIME_OF_PACKET):
@@ -73,7 +72,7 @@ func getPlayerPos():
 	return playerVelocity;
 
 func setPlayerName(playerNames:String):
-	var playerName:RichTextLabel = get_node("playerName")
+	var playerName:RichTextLabel = get_node("playerNameIndex/playerName")
 	playerName.bbcode_text = playerName.bbcode_text.replace("{playerName}", playerNames)
 	print(playerName.bbcode_text)
 

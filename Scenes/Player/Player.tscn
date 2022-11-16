@@ -5,7 +5,7 @@
 [ext_resource path="res://Assets/Font/MainMenu.tres" type="DynamicFont" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 42.5, 15.25 )
+extents = Vector2( 31.25, 8.28125 )
 
 [sub_resource type="Animation" id=6]
 resource_name = "Idle_Left"
@@ -93,16 +93,21 @@ tracks/0/keys = {
 }
 
 [node name="Player" type="KinematicBody2D"]
+collision_mask = 0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -1, 1 )
+position = Vector2( 1, -9 )
 texture = ExtResource( 2 )
 hframes = 6
 vframes = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -5, 32 )
+light_mask = 2
+position = Vector2( 0.75, 25 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -112,17 +117,20 @@ anims/RESET = SubResource( 2 )
 anims/Walk_left = SubResource( 4 )
 anims/Walk_right = SubResource( 3 )
 
-[node name="playerName" type="RichTextLabel" parent="."]
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[node name="playerNameIndex" type="Node2D" parent="."]
+z_index = 3665
+
+[node name="playerName" type="RichTextLabel" parent="playerNameIndex"]
 anchor_bottom = 0.477
-margin_left = -210.0
-margin_top = -96.0
-margin_right = 202.0
-margin_bottom = -32.0
+margin_left = -130.0
+margin_top = -80.0
+margin_right = 140.0
+margin_bottom = -53.0
 custom_fonts/normal_font = ExtResource( 3 )
 bbcode_enabled = true
 bbcode_text = "[center]{playerName}[/center]"
 text = "{playerName}"
 scroll_active = false
-
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true

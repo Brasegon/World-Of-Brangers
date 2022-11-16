@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/idle_caucasian_skintone.png-22804cf20dd82c5110887900bcb5c874.stex"
+path="res://.import/SmallBurg_outside_assets.png-bbbeafb932f86cf3c59588e72ca9d4a3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Player/idle_caucasian_skintone.png"
-dest_files=[ "res://.import/idle_caucasian_skintone.png-22804cf20dd82c5110887900bcb5c874.stex" ]
+source_file="res://Scenes/Maps/SmallBurg_outside_assets.png"
+dest_files=[ "res://.import/SmallBurg_outside_assets.png-bbbeafb932f86cf3c59588e72ca9d4a3.stex" ]
 
 [params]
 
@@ -20,16 +20,16 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
-process/fix_alpha_border=false
+process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
-detect_3d=false
+detect_3d=true
 svg/scale=1.0

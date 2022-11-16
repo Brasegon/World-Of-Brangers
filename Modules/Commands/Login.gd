@@ -7,16 +7,23 @@ const Global = preload("res://Modules/Global.gd")
 # var a = 2
 # var b = "text"
 
-func loginSuccess(packet):
+func spawnMainPlayer(packet):
 	var global: Global = get_node("/root/Global")
 	var pos = Vector2(packet.value.pos.x, packet.value.pos.y)
+
 	global.spawnPlayer(packet.value.uuid, packet.value.username, pos)
 	global.mainUuidPlayer = packet.value.uuid;
 	MainMenu.hide()
+	Network.sendCommand("game:getPlayers", {})
+	
+	
 func spawnNewPlayer(packet):
 	var global: Global = get_node("/root/Global")
 	var pos = Vector2(packet.value.pos.x, packet.value.pos.y)
+
 	global.spawnPlayerOnline(packet.value.uuid, packet.value.username, pos)
+	
+	
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
