@@ -1,15 +1,12 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Modules/Player/PlayerMain.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Sprites/walk_caucasian_skintone.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sprites/Player/idle.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Font/MainMenu.tres" type="DynamicFont" id=3]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 31.25, 8.28125 )
 
 [sub_resource type="Animation" id=6]
 resource_name = "Idle_Left"
-length = 0.5
+length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -17,15 +14,15 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.5 ),
+"times": PoolRealArray( 0, 0.2, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 30, 31, 30 ]
+"values": [ 2, 3, 2 ]
 }
 
 [sub_resource type="Animation" id=5]
 resource_name = "Idle_Right"
-length = 0.5
+length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -33,10 +30,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.5 ),
+"times": PoolRealArray( 0, 0.2, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 24, 25, 24 ]
+"values": [ 0, 1, 0 ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -100,15 +97,11 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 1, -9 )
+position = Vector2( 0, 17 )
+scale = Vector2( 0.273758, 0.273758 )
 texture = ExtResource( 2 )
-hframes = 6
-vframes = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-light_mask = 2
-position = Vector2( 0.75, 25 )
-shape = SubResource( 1 )
+hframes = 2
+vframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Idle_Left = SubResource( 6 )
@@ -125,10 +118,10 @@ z_index = 3665
 
 [node name="playerName" type="RichTextLabel" parent="playerNameIndex"]
 anchor_bottom = 0.477
-margin_left = -130.0
-margin_top = -80.0
-margin_right = 140.0
-margin_bottom = -53.0
+margin_left = -133.0
+margin_top = -113.0
+margin_right = 137.0
+margin_bottom = -86.0
 custom_fonts/normal_font = ExtResource( 3 )
 bbcode_enabled = true
 bbcode_text = "[center]{playerName}[/center]"
