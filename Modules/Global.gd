@@ -12,10 +12,10 @@ func createNewPlayer(uuid:String, name:String, pos:Vector2, type:bool):
 	var playerInstance = playerClass.instance();
 	playerInstance.setPlayerName(name)
 	playerInstance.name = uuid
-	playerInstance.setPlayerPos(pos)
 	playerInstance.init(type);
 	var players = mapInstance.get_node("World/Players");
 	players.add_child(playerInstance);
+	playerInstance.setPlayerPos(pos)
 
 func loadMaps(mapName:String):
 	var mapClass = preload("res://Scenes/Maps/Lobby.tscn");
@@ -28,6 +28,7 @@ func spawnPlayerOnline(uuid:String, name:String, pos:Vector2):
 
 func spawnPlayer(uuid:String, name:String, pos:Vector2):
 	loadMaps("Lobby")
+	print_debug(pos)
 	createNewPlayer("mainPlayer", name, pos, false);
 
 func _ready():

@@ -52,7 +52,8 @@ func connectServer():
 	ws.connect("connection_error", self, "_connection_error")
 	ws.connect("data_received", self, "_client_received")
 	
-	var url = "ws://localhost:8080"
+	#var url = "ws://localhost:8080"
+	var url = "wss://brangers.eu:8089"
 	print("Connecting to " + url)
 	ws.connect_to_url(url) # Replace with function body.
 

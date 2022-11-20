@@ -3,7 +3,7 @@ extends KinematicBody2D
 
 onready var animationPlayer = $AnimationPlayer
 var positionAnim = 0
-const SPEED = 100
+const SPEED = 200
 const TIME_OF_PACKET = 0.01
 var playerVelocity = Vector2.ZERO
 var playerPosition = Vector2.ZERO
@@ -69,12 +69,12 @@ func _physics_process(delta):
 		timer = 0
 	if ((playerVelocity.x != 0 or playerVelocity.y != 0) and okToSend):
 		Network.sendCommand("move", {
-			"x": global_transform.origin.x,
-			"y": global_transform.origin.y,
+			"x": global_position.x,
+			"y":  global_position.y,
 			"direction": playerVelocity.x
 		})
 		okToSend = false;
-	setPlayerPos(global_transform.origin)
+	setPlayerPos(global_position)
 
 func getPlayerPos():
 	return playerVelocity;
@@ -85,15 +85,15 @@ func setPlayerName(playerNames:String):
 	print(playerName.bbcode_text)
 
 func setPlayerPos(playerPosSet):
-	global_transform.origin = playerPosSet;
-	playerPosition = global_transform.origin;
+	global_position = playerPosSet;
+	playerPosition =  global_position;
 
 func init(networkPlayer:bool):
 	isNetworkPlayer = networkPlayer
 	if networkPlayer:
 		$Camera2D.current = false;
 	#ID = Network.getIdentifierPlayer()
-	print(playerPosition)
+	#print(playerPosition)
 	
 
 func _ready():

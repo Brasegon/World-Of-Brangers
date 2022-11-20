@@ -10,6 +10,27 @@ position = Vector2( 1191, 696 )
 scale = Vector2( 0.740741, 0.740741 )
 texture = ExtResource( 1 )
 
+[node name="Area2D" type="StaticBody2D" parent="."]
+position = Vector2( 0, -3 )
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PoolVector2Array( -239, -108, 2617, -100, 2607, 458, -237, 440 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2( -54, 1411 )
+polygon = PoolVector2Array( -180, -112, 136, -47, 770, -38, 1149, -106, 1500, -140, 1766, -84, 2357, -75, 2699, -98, 2671, 89, -183, 75 )
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2( -524, 488 )
+scale = Vector2( 0.110583, 1 )
+polygon = PoolVector2Array( 1709.12, -101, 2617, -100, 2640.55, 811, 1889.98, 811 )
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2( 2424, 518 )
+scale = Vector2( 0.110583, 1 )
+polygon = PoolVector2Array( 1709.12, -101, 2617, -100, 2640.55, 811, 1889.98, 811, 1784.58, 279.477 )
+
 [node name="World" type="YSort" parent="."]
 
 [node name="Props" type="YSort" parent="World"]
