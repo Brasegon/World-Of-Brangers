@@ -5,7 +5,6 @@ extends Control
 # var a = 2
 # var b = "text"
 
-const PlayerMain = preload("res://Modules/Player/PlayerMain.gd")
 
 func sendCommand(ws:WebSocketClient, command, value):
 	if ws.get_peer(1).is_connected_to_host():
@@ -26,11 +25,11 @@ func command(ws: WebSocketClient, packet):
 		$Login.spawnNewPlayer(packet)
 	if (packet.command == "move" && packet.value):
 		print(packet.value)
-		var player: PlayerMain = get_node("/root/Global/Map/World/Players/" + packet.value.uuid)
+		var player = get_node("/root/Global/Map/World/Players/" + packet.value.uuid)
 		#player.setPlayerPos(Vector2(packet.value.pos.x, packet.value.pos.y))
 		player.animation_otherPlayer(packet.value.velocity)
 	if (packet.command == "game:disconnectPlayer" && packet.value):
-		var player: PlayerMain = get_node("/root/Global/Map/World/Players/" + packet.value.uuid)
+		var player = get_node("/root/Global/Map/World/Players/" + packet.value.uuid)
 		player.queue_free()
 		
 

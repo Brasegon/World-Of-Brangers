@@ -96,4 +96,6 @@ func init(networkPlayer:bool):
 
 func _ready():
 	Logger.info("Player spawned at pos x=%s y=%s" % [playerVelocity.x, playerVelocity.y])
+	var http = Network.get_node("Http")
+	http.test123()
 	pass # Replace with function body.

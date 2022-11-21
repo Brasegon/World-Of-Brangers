@@ -21,7 +21,7 @@ func getIdentifierPlayer():
 func _connection_established(protocol):
 	print("Connection established with protocol: ", protocol)
 	isConnected = true;
-	MainMenu.connectServer(true)
+	$Http.getPlayerPCK();
 
 	
 func _connection_closed():

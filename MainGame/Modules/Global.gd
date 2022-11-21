@@ -8,9 +8,8 @@ var mainUuidPlayer;
 var mapInstance;
 var isLaunchable = false;
 
-
 func createNewPlayer(uuid:String, name:String, pos:Vector2, type:bool):
-	var playerClass = preload("res://Modules/Player/Player.tscn");
+	var playerClass = load("res://Modules/Player/Player.tscn");
 	var playerInstance = playerClass.instance();
 	playerInstance.setPlayerName(name)
 	playerInstance.name = uuid
@@ -33,13 +32,6 @@ func spawnPlayer(uuid:String, name:String, pos:Vector2):
 	print_debug(pos)
 	createNewPlayer("mainPlayer", name, pos, false);
 
-func _ready():
-	if (!OS.is_debug_build()):
-		MainMenu.hide();
-		var playerModule = ProjectSettings.load_resource_pack("res://player.pck");
-		if (playerModule):
-			MainMenu.show();
-	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
