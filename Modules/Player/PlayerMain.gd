@@ -10,7 +10,11 @@ var playerPosition = Vector2.ZERO
 var okToSend = true
 var timer = 0
 var playerIsMove = false
-var isNetworkPlayer = false
+var isWalking = false
+var isIdle = true
+var changePosition = false;
+var isNetworkPlayer = false;
+var tmpVelocity = Vector2.ZERO;
 
 func idle_anim():
 	if (positionAnim == 1):
@@ -34,13 +38,9 @@ func animation_player_x():
 		playerIsMove = true
 		animationPlayer.play("Walk_left")
 
-func animation_otherPlayer(type):
-	if (type == 1):
-		positionAnim = 1
-		animationPlayer.play("Walk_right")
-	if (type == 2):
-		animationPlayer.play("Walk_left")
-		positionAnim = 0
+func animation_otherPlayer(velocity):
+	playerVelocity.x = velocity.x;
+	playerVelocity.y = velocity.y;
 
 func animation_player():
 	if (playerVelocity.y > 0):
@@ -55,25 +55,26 @@ func _physics_process(delta):
 	if !isNetworkPlayer:
 		playerVelocity.x = (Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"))
 		playerVelocity.y = (Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up"))
-		animation_player()
+	animation_player()
 	if (playerVelocity.x == 0 && playerVelocity.y == 0 && playerIsMove):
 		animationPlayer.stop()
 		playerIsMove = false
 	if (!animationPlayer.current_animation == "Walk_right" && !animationPlayer.current_animation == "Walk_left"):
 		idle_anim()
-	playerVelocity = move_and_slide(playerVelocity * SPEED)
-	if (okToSend == false):
-		timer += delta
-	if (timer >= TIME_OF_PACKET):
-		okToSend = true
-		timer = 0
-	if ((playerVelocity.x != 0 or playerVelocity.y != 0) and okToSend):
-		Network.sendCommand("move", {
-			"x": global_position.x,
-			"y":  global_position.y,
-			"direction": playerVelocity.x
+	move_and_slide(playerVelocity * SPEED)
+	if (playerVelocity != tmpVelocity):
+		changePosition = true
+	if (!isNetworkPlayer and changePosition):
+		tmpVelocity = playerVelocity;
+		Network.sendCommand("player:move", {
+			"x": playerVelocity.x,
+			"y":  playerVelocity.y,
+			"pos": {
+				"x": global_position.x,
+				"y": global_position.y
+			}
 		})
-		okToSend = false;
+		changePosition = false;
 	setPlayerPos(global_position)
 
 func getPlayerPos():
@@ -92,9 +93,6 @@ func init(networkPlayer:bool):
 	isNetworkPlayer = networkPlayer
 	if networkPlayer:
 		$Camera2D.current = false;
-	#ID = Network.getIdentifierPlayer()
-	#print(playerPosition)
-	
 
 func _ready():
 	Logger.info("Player spawned at pos x=%s y=%s" % [playerVelocity.x, playerVelocity.y])

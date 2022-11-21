@@ -6,9 +6,11 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 var mainUuidPlayer;
 var mapInstance;
+var isLaunchable = false;
+
 
 func createNewPlayer(uuid:String, name:String, pos:Vector2, type:bool):
-	var playerClass = preload("res://Scenes/Player/Player.tscn");
+	var playerClass = preload("res://Modules/Player/Player.tscn");
 	var playerInstance = playerClass.instance();
 	playerInstance.setPlayerName(name)
 	playerInstance.name = uuid
@@ -18,7 +20,7 @@ func createNewPlayer(uuid:String, name:String, pos:Vector2, type:bool):
 	playerInstance.setPlayerPos(pos)
 
 func loadMaps(mapName:String):
-	var mapClass = preload("res://Scenes/Maps/Lobby.tscn");
+	var mapClass = preload("res://Modules/Maps/Lobby/Lobby.tscn");
 	mapInstance = mapClass.instance();
 	mapInstance.name = "Map"
 	add_child(mapInstance)
@@ -32,6 +34,11 @@ func spawnPlayer(uuid:String, name:String, pos:Vector2):
 	createNewPlayer("mainPlayer", name, pos, false);
 
 func _ready():
+	if (!OS.is_debug_build()):
+		MainMenu.hide();
+		var playerModule = ProjectSettings.load_resource_pack("res://player.pck");
+		if (playerModule):
+			MainMenu.show();
 	pass # Replace with function body.
 
 
