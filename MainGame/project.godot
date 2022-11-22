@@ -19,6 +19,7 @@ Logger="*res://Librairies/Logger/logger.gd"
 Network="*res://Modules/Utils/Network/Network.tscn"
 Global="*res://Scenes/Global.tscn"
 MainMenu="*res://Modules/Menu/MainMenu/MainMenu.tscn"
+Config="*res://Modules/Config.gd"
 
 [debug]
 

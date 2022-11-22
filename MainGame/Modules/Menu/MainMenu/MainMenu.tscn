@@ -125,6 +125,24 @@ bbcode_enabled = true
 bbcode_text = "[center]Connexion en cours...[/center]"
 text = "Connexion en cours..."
 
+[node name="MissingLib" type="Panel" parent="."]
+visible = false
+margin_left = -16.0
+margin_top = -14.0
+margin_right = 1904.0
+margin_bottom = 1081.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MissingLib"]
+margin_left = 328.0
+margin_top = 519.0
+margin_right = 1648.0
+margin_bottom = 583.0
+theme = SubResource( 4 )
+custom_fonts/normal_font = ExtResource( 3 )
+bbcode_enabled = true
+bbcode_text = "[center]Missing Lib {libname}...[/center]"
+text = "Missing Lib {libname}..."
+
 [node name="Control" type="Control" parent="."]
 margin_top = 1024.0
 margin_right = 1918.0

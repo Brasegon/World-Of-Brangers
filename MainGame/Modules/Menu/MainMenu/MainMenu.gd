@@ -9,6 +9,10 @@ var player = null
 var buttonJoinPressed = false;
 var playerConnected = false;
 
+func missingLib(libName: String):
+	$MissingLib/RichTextLabel.bbcode_text = $MissingLib/RichTextLabel.bbcode_text.replace("{libname}", libName)
+	$MissingLib.show();
+	$Connection.hide();
 
 func connectServer(success:bool):
 	if (success):

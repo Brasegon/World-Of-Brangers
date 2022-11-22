@@ -21,7 +21,7 @@ func getIdentifierPlayer():
 func _connection_established(protocol):
 	print("Connection established with protocol: ", protocol)
 	isConnected = true;
-	if (!OS.is_debug_build()):
+	if (Config.loadPck):
 		$Http.getPlayerPCK();
 	else:
 		MainMenu.connectServer(true)
@@ -54,7 +54,7 @@ func connectServer():
 	ws.connect("connection_error", self, "_connection_error")
 	ws.connect("data_received", self, "_client_received")
 	
-	var url = "ws://localhost:8080"
+	var url = Config.URLWS
 	#var url = "wss://brangers.eu:8089"
 	print("Connecting to " + url)
 	ws.connect_to_url(url) # Replace with function body.
