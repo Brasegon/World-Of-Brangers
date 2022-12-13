@@ -26,7 +26,7 @@ func command(ws: WebSocketClient, packet):
 	if (packet.command == "move" && packet.value):
 		print(packet.value)
 		var player = get_node("/root/Global/Map/World/Players/" + packet.value.uuid)
-		#player.setPlayerPos(Vector2(packet.value.pos.x, packet.value.pos.y))
+		player.setPlayerPos(Vector2(packet.value.pos.x, packet.value.pos.y))
 		player.animation_otherPlayer(packet.value.velocity)
 	if (packet.command == "game:disconnectPlayer" && packet.value):
 		var player = get_node("/root/Global/Map/World/Players/" + packet.value.uuid)

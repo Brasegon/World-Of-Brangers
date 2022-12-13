@@ -1,12 +1,12 @@
 extends Control
 
-onready var MainMenu = $"/root/MainMenu"
 onready var Global = $"/root/Global"
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
 
 func spawnMainPlayer(packet):
+	var MainMenu = $"/root/Global/Menu/MainMenu"
 	var pos = Vector2(packet.value.pos.x, packet.value.pos.y)
 
 	Global.spawnPlayer(packet.value.uuid, packet.value.username, pos)
